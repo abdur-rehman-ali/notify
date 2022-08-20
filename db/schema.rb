@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_20_142206) do
+ActiveRecord::Schema.define(version: 2022_08_20_175625) do
 
   create_table "trade_requests", force: :cascade do |t|
     t.integer "sent_by"
     t.integer "user_id"
+    t.index ["user_id", "sent_by"], name: "index_trade_requests_on_user_id_and_sent_by", unique: true
     t.index ["user_id"], name: "index_trade_requests_on_user_id"
   end
 

@@ -1,5 +1,4 @@
 <h1>Display all users</h1>
-
 <% @users.each do |user|%>
     <h3><%= user.email%> </h3>
     <%= link_to 'send request',trade_path(user_id: user.id, sent_by: current_user), method: :post %>
