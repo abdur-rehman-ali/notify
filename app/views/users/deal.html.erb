@@ -1,0 +1,14 @@
+<h1>Business page</h1>
+<h1><%= @user.email %></h1> 
+<% @user.inventories.each do |item|%>
+    <strong><%= item.name%></strong>
+    <p><%= item.quantity%></p>
+<% end %>
+<h1>My inventory</h1>
+<% current_user.inventories.each do |item|%>
+    <strong><%= item.name%></strong>
+    <p><%= item.quantity%></p>
+<% end %>
+
+
+<%= link_to 'send request',trade_path(user_id: @user.id, sent_by: current_user), method: :post %>

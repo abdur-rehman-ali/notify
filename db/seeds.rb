@@ -13,3 +13,14 @@
         password_confirmation: 'dev1234'
     )
 end
+
+10.times do |j|
+    4.times do |i|
+        Inventory.create(
+            name: "Item #{i+1}",
+            quantity: 10 + i,
+            user_id: j+1,
+        )
+    end
+end
+

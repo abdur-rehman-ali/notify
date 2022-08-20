@@ -1,4 +1,5 @@
 class UsersController < ApplicationController 
+    before_action :authenticate_user!
     def index
         @users = User.all 
     end
@@ -6,9 +7,13 @@ class UsersController < ApplicationController
     def trade
         @request = TradeRequest.new(user_id:params[:user_id],sent_by:params[:sent_by])
         if @request.save
-            redirect_to users_path, notice: 'Request sent'
+            redirect_to root_path, notice: 'Request sent'
         else
-            redirect_to users_path, alert: 'Request sent failed'
+            redirect_to root_path, alert: 'Request sent failed'
         end
+    end
+
+    def deal 
+        @user = User.find(params[:id])
     end
 end

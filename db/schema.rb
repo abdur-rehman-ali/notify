@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_20_175625) do
+ActiveRecord::Schema.define(version: 2022_08_20_181117) do
+
+  create_table "inventories", force: :cascade do |t|
+    t.string "name"
+    t.integer "quantity"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_inventories_on_user_id"
+  end
 
   create_table "trade_requests", force: :cascade do |t|
     t.integer "sent_by"
