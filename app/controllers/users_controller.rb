@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     end
 
     def trade
-        @request = TradeRequest.new(user_id:params[:user_id],sent_by:params[:sent_by])
+        @request = TradeRequest.new(user_id:params[:user_id],sent_to:params[:sent_to])
         if @request.save
             redirect_to root_path, notice: 'Request sent'
         else
