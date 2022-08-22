@@ -66,6 +66,7 @@
   <% trade.receive_items.each do |sent| %>
     <%= sent.name %>  <%= sent.quantity %> <br>
   <% end %>
+  <%= link_to 'cancel', destroy_path(trade.id), method: :delete, confirm:{ data:'Are you sure?'} %>
   <hr>
 
 <% end %>

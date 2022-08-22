@@ -36,6 +36,13 @@ class UsersController < ApplicationController
         end
     end
 
+    def destroy 
+        @trade = TradeRequest.find(params[:id])
+        if @trade.destroy 
+            redirect_to edit_user_registration_path, notice: 'Cancelled'
+        end
+    end
+
     def trade_params 
         params.require(:user).permit(:user_id, :sent_to)
     end
