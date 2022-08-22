@@ -1,0 +1,4 @@
+Sent To: <%= User.find(@trade.sent_to).email%>
+<%= render 'users/show', trade: @trade%>
+<%= link_to 'cancel', destroy_path(@trade.id), method: :delete, confirm:{ data:'Are you sure?'} %>
+<hr>

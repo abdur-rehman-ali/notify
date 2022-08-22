@@ -22,6 +22,14 @@ class UsersController < ApplicationController
         end
     end
 
+    def sent_show 
+        @trade = TradeRequest.find(params[:id])
+    end
+
+    def receive_show 
+        @trade = TradeRequest.find(params[:id])
+    end
+
     def accept
         @trade = TradeRequest.find(params[:id])
         if @trade.update(status: 'ACCEPT')

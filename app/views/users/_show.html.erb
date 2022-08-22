@@ -1,0 +1,8 @@
+<h3>Sent items of trade <%= trade.id%> </h3>
+  <% trade.sent_items.each do |sent| %>
+    <%= sent.name %>  <%= sent.quantity %> <br>
+  <% end %>
+  <h3>Receive items of trade <%= trade.id%> </h3>
+  <% trade.receive_items.each do |sent| %>
+    <%= sent.name %>  <%= sent.quantity %> <br>
+<% end %>

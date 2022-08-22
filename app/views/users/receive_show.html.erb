@@ -1,0 +1,8 @@
+<h1>Display single trade</h1>
+
+Sent by: <%= User.find(@trade.user_id).email%> <br>
+  Status: <%= @trade.status %>
+  <%= render 'users/show', trade: @trade%>
+  <%= link_to 'accept', accept_path(@trade.id), method: :patch %>
+  <%= link_to 'reject', reject_path(@trade.id), method: :patch %>
+<hr>
