@@ -12,8 +12,6 @@
 
 <input type="submit" value="Trade" id='submit-btn'>
 
-<%= link_to 'send request',trade_path(user_id: current_user, sent_to: @user.id), method: :post %>
-
 <script>
 $(document).ready(function(){
   $('#submit-btn').click(function(){
