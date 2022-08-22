@@ -36,6 +36,8 @@
   </div>
 <% end %>
 
+<h1 align='center'>Trade History</h1>
+
 <h1>Trade requests received</h1> <hr>
 <% TradeRequest.where(sent_to: current_user.id).each do |trade|%>
   <h3>Sent items of trade <%= trade.id%> </h3>
