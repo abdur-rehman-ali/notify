@@ -40,17 +40,20 @@
 
 <h1>Trade requests received</h1> <hr>
 <% TradeRequest.where(sent_to: current_user.id).each do |trade|%>
-  Sent by: <%= User.find(trade.user_id).email%>
+  Sent by: <%= User.find(trade.user_id).email%> <br>
+  Status: <%= trade.status %>
   <h3>Sent items of trade <%= trade.id%> </h3>
   <% trade.sent_items.each do |sent| %>
-    <%= sent.name %>  <%= sent.quantity %> <br>
+    <%= sent.name %>  <%= sent.quantity %>
+    <br>
   <% end %>
   <h3>Receive items of trade <%= trade.id%> </h3>
   <% trade.receive_items.each do |sent| %>
     <%= sent.name %>  <%= sent.quantity %> <br>
   <% end %>
+  <%= link_to 'accept', accept_path(trade.id), method: :patch %>
+  <%= link_to 'reject', reject_path(trade.id), method: :patch %>
   <hr>
-
 <% end %>
 <h1>Trade requests sent by me</h1>
 <% current_user.trade_requests.each do |trade|%>

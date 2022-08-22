@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_22_080114) do
+ActiveRecord::Schema.define(version: 2022_08_22_132920) do
 
   create_table "inventories", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2022_08_22_080114) do
   create_table "trade_requests", force: :cascade do |t|
     t.integer "sent_to"
     t.integer "user_id"
+    t.integer "status"
     t.index ["user_id", "sent_to"], name: "index_trade_requests_on_user_id_and_sent_to", unique: true
     t.index ["user_id"], name: "index_trade_requests_on_user_id"
   end

@@ -22,6 +22,20 @@ class UsersController < ApplicationController
         end
     end
 
+    def accept
+        @trade = TradeRequest.find(params[:id])
+        if @trade.update(status: 'ACCEPT')
+            redirect_to edit_user_registration_path, notice: 'Accepted'
+        end
+    end
+
+    def reject
+        @trade = TradeRequest.find(params[:id])
+        if @trade.update(status: 'REJECT')
+            redirect_to edit_user_registration_path, notice: 'Rejected'
+        end
+    end
+
     def trade_params 
         params.require(:user).permit(:user_id, :sent_to)
     end
