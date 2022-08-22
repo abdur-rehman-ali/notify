@@ -36,8 +36,30 @@
   </div>
 <% end %>
 
-<h3>Trade requests received</h3>
-<%= TradeRequest.where(sent_to: current_user.id).count%>
-<h3>Trade requests sent by me</h3>
-<%= current_user.trade_requests.count %> <br>
+<h1>Trade requests received</h1> <hr>
+<% TradeRequest.where(sent_to: current_user.id).each do |trade|%>
+  <h3>Sent items of trade <%= trade.id%> </h3>
+  <% trade.sent_items.each do |sent| %>
+    <%= sent.name %>  <%= sent.quantity %> <br>
+  <% end %>
+  <h3>Receive items of trade <%= trade.id%> </h3>
+  <% trade.receive_items.each do |sent| %>
+    <%= sent.name %>  <%= sent.quantity %> <br>
+  <% end %>
+  <hr>
+
+<% end %>
+<h1>Trade requests sent by me</h1>
+<% current_user.trade_requests.each do |trade|%>
+  <h3>Sent items of trade <%= trade.id%> </h3>
+  <% trade.sent_items.each do |sent| %>
+    <%= sent.name %>  <%= sent.quantity %> <br>
+  <% end %>
+  <h3>Receive items of trade <%= trade.id%> </h3>
+  <% trade.receive_items.each do |sent| %>
+    <%= sent.name %>  <%= sent.quantity %> <br>
+  <% end %>
+  <hr>
+
+<% end %>
 <%= link_to "Back", :back %>
