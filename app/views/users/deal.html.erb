@@ -1,14 +1,67 @@
 <h1>Business page</h1>
 <h1><%= @user.email %></h1> 
 <% @user.inventories.each do |item|%>
-    <strong><%= item.name%></strong>
-    <p><%= item.quantity%></p>
+    <strong class='name'><%= item.name%></strong>
+    <p class='quantity'><%= item.quantity%></p>
 <% end %>
 <h1>My inventory</h1>
 <% current_user.inventories.each do |item|%>
-    <strong><%= item.name%></strong>
-    <p><%= item.quantity%></p>
+    <strong class='item-send-name'><%= item.name%></strong>
+    <p class='item-send-quantity'><%= item.quantity%></p>
 <% end %>
 
+<input type="submit" value="Trade" id='submit-btn'>
 
 <%= link_to 'send request',trade_path(user_id: current_user, sent_to: @user.id), method: :post %>
+
+<script>
+$(document).ready(function(){
+  $('#submit-btn').click(function(){
+    console.log('btn clicked');
+    let name = document.querySelectorAll('.name');
+    let quantity = document.querySelectorAll('.quantity');
+
+    let trade_request={
+        user_id: <%= current_user.id %>,
+        sent_to: <%= @user.id %>,
+    }
+
+    console.log(trade_request);
+    let sent_item_data = [];
+    for(let i=0; i< name.length; i++){
+        sent_item_data.push({
+          name: name[i].innerText,
+          quantity: quantity[i].innerText,
+        })
+    } 
+    console.log(sent_item_data);
+
+    let sent_name = document.querySelectorAll('.item-send-name');
+    let sent_quantity = document.querySelectorAll('.item-send-quantity');
+    let receive_item_data = [];
+    for(let i=0; i< sent_name.length; i++){
+        receive_item_data.push({
+          name: sent_name[i].innerText,
+          quantity: sent_quantity[i].innerText,
+        })
+    } 
+    let data={
+        user: trade_request,
+        sent_items: sent_item_data,
+        receive_items: receive_item_data,
+    }
+    $.ajax({
+        type: "POST", 
+        url: "/trade",
+        async:false,
+        data: data,
+        success: function(data, textStatus, jqXHR){
+        console.log(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        console.log(errorThrown);
+        }
+    })
+  })
+});
+</script>
